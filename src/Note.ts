@@ -1,5 +1,3 @@
-import * as chalk from 'chalk';
-
 /**
  * # Class Note
  * Esta clase se encargara de la estructura y componentes de cada nota.
