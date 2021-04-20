@@ -28,7 +28,7 @@ export class Note {
               private Body: string,
               private Color: TypeColor) {}
 
-  setName(newTitle: string): void {
+  setTitle(newTitle: string): void {
     this.Title = newTitle;
   }
 
