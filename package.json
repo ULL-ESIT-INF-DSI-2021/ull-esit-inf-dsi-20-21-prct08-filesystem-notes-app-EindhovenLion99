@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "coverage": "nyc npm run tests && nyc report --reporter=lcov",
+    "start": "tsc && node dist/.js",
+    "watch": "mocha --watch",
+    "tests": "mocha",
+    "doc": "typedoc; touch ./docs/.nojekyll"
   },
   "keywords": [],
   "author": "",
