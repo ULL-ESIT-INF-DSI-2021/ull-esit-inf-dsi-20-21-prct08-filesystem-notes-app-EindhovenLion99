@@ -17,3 +17,7 @@
       * Cargar la lista de notas desde los diferentes ficheros con formato JSON almacenados en el directorio del usuario correspondiente.
 4. Un usuario solo puede interactuar con la aplicación de procesamiento de notas de texto a través de la línea de comandos. Los diferentes comandos, opciones de los mismos, así como manejadores asociados a cada uno de ellos deben gestionarse mediante el uso del paquete yargs.
 
+## Funcionamiento del programa
+
+El programa funciona de la siguiente forma, se introduce un nombre de usuario, si este existe en la base de datos, se crea a su vez una base de datos con las notas para este usuario, en caso de que no exista el usuario, se añade a la base de datos asi como creando un nuevo fichero con sus notas.
+
