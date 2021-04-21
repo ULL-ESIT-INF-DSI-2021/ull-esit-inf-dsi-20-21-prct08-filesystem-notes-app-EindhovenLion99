@@ -19,6 +19,8 @@
  * @method getColor() Retorna el color de la nota
  */
 
+import chalk from "chalk";
+
 export type TypeColor = "Red" | "Green" | "Blue" | "Yellow";
 
 export class Note {
@@ -48,5 +50,39 @@ export class Note {
 
   getColor(): TypeColor {
     return this.Color;
+  }
+
+  printTitle() {
+    switch (this.Color) {
+      case "Red":
+        console.log(chalk.red(this.Title));
+        break;
+      case "Blue":
+        console.log(chalk.blue(this.Title));
+        break;
+      case "Green":
+        console.log(chalk.green(this.Title));
+        break;
+      case "Yellow":
+        console.log(chalk.yellow(this.Title));
+        break;
+    } 
+  }
+
+  printBody() {
+    switch (this.Color) {
+      case "Red":
+        console.log(chalk.red(this.Body));
+        break;
+      case "Blue":
+        console.log(chalk.blue(this.Body));
+        break;
+      case "Green":
+        console.log(chalk.green(this.Body));
+        break;
+      case "Yellow":
+        console.log(chalk.yellow(this.Body));
+        break;
+    } 
   }
 }
