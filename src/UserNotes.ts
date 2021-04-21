@@ -1,6 +1,6 @@
 import {Note, TypeColor} from './Note'
 import {DBHandler} from './dbHandler'
-import * as chalk from 'chalk';
+const chalk = require('chalk');
 
 export class UserNotes {
   constructor(private UserName: string, private Notes: Note[] = []) {
@@ -8,17 +8,69 @@ export class UserNotes {
   }
 
   addNewNote(Title: string, Body: string, Color: TypeColor): void {
-    this.Notes.push(new Note(Title, Body, Color));
+    let check: [boolean, Note] = this.existNote(Title);
+    if(!check[0]) {
+      this.Notes.push(new Note(Title, Body, Color));
+      console.log(chalk.green.bold("Nueva nota creada!"));
+    } else {
+      console.log(chalk.red.bold("Ya existe una nota con el mismo titulo"));
+    }
+  }
+
+  modifyNote(newBody: string, Title: string) {
+    let check: [boolean, Note] = this.existNote(Title);
+    if (check[0]) {
+      const index = this.Notes.indexOf(check[1]);
+      this.Notes[index].setBody(newBody);
+      console.log(chalk.green.bold("Nota modificada!"));
+    } else {
+      console.log(chalk.red.bold("No existe ninguna nota con ese titulo"));
+    }
   }
 
   removeNote(Title: string): void {
+    let check: [boolean, Note] = this.existNote(Title);
+    if (check[0]) {
+      const index = this.Notes.indexOf(check[1])
+      if (index > -1) this.Notes.splice(index, 1);
+      console.log(chalk.green("Nota Eliminada!"));
+    } else {
+      console.log(chalk.red.bold("No existe ninguna nota con ese titulo"));
+    }
+  }
+
+  existNote(Title: string): [boolean, Note] {
+    let found: boolean = false;
+    let foundNote: Note = new Note("-", "-", "Red");
     this.Notes.forEach(note => {
       if (note.getTitle() === Title) {
-        const index = this.Notes.indexOf(note)
-        if (index > -1) this.Notes.splice(index, 1);
+        found = true;
+        foundNote = note;
       }
-    });
+    })
+    return [found, foundNote];
+  }
+
+  listTitles() {
+    this.Notes.forEach(note => {
+      note.printTitle();
+    })
+  }
+
+  readNote(Title: string) {
+    let check: [boolean, Note] = this.existNote(Title);
+    if (check[0]) {
+      console.log("------------------------")
+      check[1].printTitle();
+      check[1].printBody();
+      console.log("------------------------")
+    } else {
+      console.log(chalk.red.bold("No existe ninguna nota con ese titulo"));
+    }
   }
 }
 
 let Persona1: UserNotes = new UserNotes("Juan");
+Persona1.addNewNote("Nota 1", "Primera nota", "Blue");
+Persona1.listTitles();
+Persona1.readNote("Nota 1");
