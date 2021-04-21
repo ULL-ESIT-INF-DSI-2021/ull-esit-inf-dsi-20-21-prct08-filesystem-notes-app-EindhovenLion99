@@ -25,4 +25,14 @@ export class DBHandler {
                             id: Math.floor(Math.random() * (10000 - 1) + 1)})
       .write();
   }
+
+  databaseUpdater(Username: string, Notes: Note[]) {
+    Notes.forEach(note => {
+      db.get('Users')
+      .find({name: Username})
+      .get("notes")
+      .push({Title: note.getTitle(), Body: note.getBody(), Color: note.getColor()})
+      .write()
+    })
+  }
 }
