@@ -2,14 +2,8 @@
   "Users": [
     {
       "name": "Juan",
-      "notes": [
-        {
-          "title": "Primera",
-          "body": "Body",
-          "Color": "Blue"
-        }
-      ],
-      "id": 1378
+      "notes": [],
+      "id": 3524
     }
   ]
 }
