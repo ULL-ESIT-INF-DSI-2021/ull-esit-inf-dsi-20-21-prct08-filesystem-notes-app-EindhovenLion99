@@ -12,8 +12,8 @@ export class DBHandler {
     } else {
       let sz: number = db.get('Users').find({name: UserName}).get("notes").size().value();
       for (let i = 0; i < sz; i++) {
-        Notes.push(new Note(db.get('Users').find({name: UserName}).get(`notes[${i}].title`).value(),
-                            db.get('Users').find({name: UserName}).get(`notes[${i}].body`).value(),
+        Notes.push(new Note(db.get('Users').find({name: UserName}).get(`notes[${i}].Title`).value(),
+                            db.get('Users').find({name: UserName}).get(`notes[${i}].Body`).value(),
                             db.get('Users').find({name: UserName}).get(`notes[${i}].Color`).value()));
       }
     }
@@ -27,6 +27,7 @@ export class DBHandler {
   }
 
   databaseUpdater(Username: string, Notes: Note[]) {
+    db.get('Users').find({name: Username}).get("notes").remove().write();
     Notes.forEach(note => {
       db.get('Users')
       .find({name: Username})
