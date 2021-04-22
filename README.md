@@ -1,5 +1,7 @@
 # Informe Practica 8
 
+[![Test](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-EindhovenLion99/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-EindhovenLion99/actions/workflows/node.js.yml)
+
 ## Procesamiento de notas de texto
 
 1. La aplicación de notas deberá permitir que múltiples usuarios interactúen con ella, pero no simultáneamente.
