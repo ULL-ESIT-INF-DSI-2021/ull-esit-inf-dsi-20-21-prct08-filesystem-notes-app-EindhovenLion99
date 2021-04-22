@@ -1,3 +1,78 @@
+/**
+ * # Clase UserNotes
+ * Esta clase se encarga de la creacion, eliminacion y modificacion de las notas de cada usuario.
+ * 
+ * El constructor se compone por un ```Username```, que sera el nombre de usuario, un conjunto de notas vacias, ya asignado y un objeto de tipo DBHandler.
+ * El DBHandler se encarga la obtencion de los datos del .json y la actualizacion de estos.
+ * 
+ * @param UserName Nombre del usuario
+ * @param Notes    Conjuto de notas
+ * @param DB       Manejador de la base de datos
+ * 
+ * ## Funcion addNewNote(Title: string, Body: string, Color: TypeColor)
+ * 
+ * Se encarga de añadir una nueva nota al conjunto de notas, primero, tenemos una 
+ * variable booleana que se encarga de comprobar que se añade una nueva nota, luego, 
+ * una variable ```check```, de tipo [boolean, number], la cual se le asigna lo que retorna 
+ * la llamada a la funcion ```existNote()```, la cual retorna si la nota que recibe por parametro existe.
+ * 
+ * Si el valor del booleano de ```check``` es false, se procede a añadir la nota, se cambia el valor de complete 
+ * a true, se imprime por pantalla que la nota se ha creado, en caso contrario se imprime un mensaje alertando 
+ * de que no se ha creado la nota debido a que existe.
+ * 
+ * @param complete  Comprueba que se realiza la accion
+ * @param check     Comprueba que exista o no la nota a añadir
+ * 
+ * ## Funcion modifyNote(Body: string, Title: string)
+ * 
+ * Se encarga de modificar una nota del conjunto de notas, al igual que la funcion anterior, tenemos una 
+ * variable booleana que se encarga de comprobar que se modifica la nota, al igual que check.
+ * 
+ * Si el valor del booleano de ```check``` es true, se procede a modificar la nota, se cambia el valor de complete 
+ * a true, se imprime por pantalla que la nota se ha modificado, en caso contrario se imprime un mensaje alertando 
+ * de que no se ha modificado la nota debido a que no existe.
+ * 
+ * @param complete  Comprueba que se realiza la accion
+ * @param check     Comprueba que exista o no la nota a añadir
+ * 
+ * 
+ * ## Funcion removeNote(Title: string)
+ * 
+ * Se encarga de elimianr una nota del conjunto de notas, al igual que la funcion anterior, tenemos una 
+ * variable booleana que se encarga de comprobar que se elimina la nota, al igual que check.
+ * 
+ * Si el valor del booleano de ```check``` es true, se procede a eliminar la nota, se cambia el valor de complete 
+ * a true, se imprime por pantalla que la nota se ha eliminado, en caso contrario se imprime un mensaje alertando 
+ * de que no se ha eliminado la nota debido a que no existe.
+ * 
+ * @param complete  Comprueba que se realiza la accion
+ * @param check     Comprueba que exista o no la nota a añadir
+ * 
+ * 
+ * ## Funcion existNote(Title: string)
+ * 
+ * Se encarga de comprobar si la nota que se le pasa por parametro esta dentro del conjunto de notas.
+ * 
+ * Tenemos una variable booleana found, si se encuentra el titulo en el conjunto esta variable se pasa a true, 
+ * luego un objeto de tipo Note que se asigna el objeto econtrado, luego se retorna el objeto [boolean, Note]
+ * 
+ * @param found       True si se encuentra la nota
+ * @param foundNote   Nota encontrada
+ * 
+ * ## Funcion listTitles()
+ * 
+ * Se encarga de listar todas las notas del usuario
+ * Se llama a la funcion printTitle() de cada nota del conjunto.
+ * 
+ * ## Funcion readNote(Title: string)
+ * 
+ * Si la nota existe, llamamos a printTitle() y printBody() de la nota a leer
+ * 
+ * @param check
+ * 
+ */
+
+
 import {Note, TypeColor} from './Note'
 import {DBHandler} from './dbHandler'
 const chalk = require('chalk');
