@@ -10,36 +10,45 @@ export class UserNotes {
     this.DB.databaseUpdater(this.UserName, this.Notes);
   }
 
-  addNewNote(Title: string, Body: string, Color: TypeColor): void {
+  addNewNote(Title: string, Body: string, Color: TypeColor): boolean {
+    let complete: boolean = false;
     let check: [boolean, Note] = this.existNote(Title);
     if(!check[0]) {
       this.Notes.push(new Note(Title, Body, Color));
+      complete = true;
       console.log(chalk.green.bold("Nueva nota creada!"));
     } else {
       console.log(chalk.red.bold("Ya existe una nota con el mismo titulo"));
     }
+    return complete;
   }
 
-  modifyNote(newBody: string, Title: string) {
+  modifyNote(newBody: string, Title: string): boolean {
+    let complete: boolean = false;
     let check: [boolean, Note] = this.existNote(Title);
     if (check[0]) {
       const index = this.Notes.indexOf(check[1]);
       this.Notes[index].setBody(newBody);
+      complete = true;
       console.log(chalk.green.bold("Nota modificada!"));
     } else {
       console.log(chalk.red.bold("No existe ninguna nota con ese titulo"));
     }
+    return complete;
   }
 
-  removeNote(Title: string): void {
+  removeNote(Title: string): boolean {
+    let complete: boolean = false;
     let check: [boolean, Note] = this.existNote(Title);
     if (check[0]) {
       const index = this.Notes.indexOf(check[1])
       if (index > -1) this.Notes.splice(index, 1);
+      complete = true;
       console.log(chalk.green("Nota Eliminada!"));
     } else {
       console.log(chalk.red.bold("No existe ninguna nota con ese titulo"));
     }
+    return complete;
   }
 
   existNote(Title: string): [boolean, Note] {
