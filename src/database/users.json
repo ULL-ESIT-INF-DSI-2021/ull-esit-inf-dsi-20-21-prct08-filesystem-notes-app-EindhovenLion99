@@ -1,15 +1,4 @@
 {
   "Users": [
-    {
-      "name": "Felipe",
-      "notes": [
-        {
-          "Title": "Nota 1",
-          "Body": "Nueva nota",
-          "Color": "Red"
-        }
-      ],
-      "id": 722
-    }
   ]
 }
