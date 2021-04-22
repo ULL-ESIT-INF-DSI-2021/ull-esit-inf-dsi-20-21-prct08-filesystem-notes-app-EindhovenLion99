@@ -32,8 +32,8 @@ yargs.command({
         && typeof argv.color === 'string' && typeof argv.user === 'string') {
       let User: UserNotes = new UserNotes(argv.user);
       let Color: TypeColor = colorGetter(argv.color);
-      User.addNewNote(argv.title, argv.body, Color);
-      User.updateUser();
+      if(User.addNewNote(argv.title, argv.body, Color))
+        User.updateUser();
     }
   },
 });
@@ -57,8 +57,8 @@ yargs.command({
   handler(argv) {
     if (typeof argv.title === 'string' && typeof argv.user === 'string') {
       let User: UserNotes = new UserNotes(argv.user);
-      User.removeNote(argv.title);
-      User.updateUser();
+      if(User.removeNote(argv.title))
+        User.updateUser();
     }
   },
 });
@@ -86,8 +86,8 @@ yargs.command({
   handler(argv) {
     if (typeof argv.title === 'string' && typeof argv.user === 'string' && typeof argv.body === 'string') {
       let User: UserNotes = new UserNotes(argv.user);
-      User.modifyNote(argv.title, argv.body);
-      User.updateUser();
+      if(User.modifyNote(argv.body, argv.title))
+        User.updateUser();
     }
   },
 });
@@ -112,7 +112,6 @@ yargs.command({
     if (typeof argv.title === 'string' && typeof argv.user === 'string') {
       let User: UserNotes = new UserNotes(argv.user);
       User.readNote(argv.title);
-      User.updateUser();
     }
   },
 });
@@ -131,7 +130,6 @@ yargs.command({
     if (typeof argv.user === 'string') {
       let User: UserNotes = new UserNotes(argv.user);
       User.listTitles();
-      User.updateUser();
     }
   },
 });
@@ -140,7 +138,7 @@ yargs.parse();
 
 
 function colorGetter(color: string): TypeColor {
-  let color_: TypeColor = "Blue";
+  let color_: TypeColor = "Blue"
   switch (color) {
     case "Blue":
       color_ = "Blue";
