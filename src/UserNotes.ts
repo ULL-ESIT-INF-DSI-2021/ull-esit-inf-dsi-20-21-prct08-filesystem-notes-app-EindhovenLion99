@@ -3,8 +3,11 @@ import {DBHandler} from './dbHandler'
 const chalk = require('chalk');
 
 export class UserNotes {
-  constructor(private UserName: string, private Notes: Note[] = []) {
-    let DB: DBHandler = new DBHandler(UserName, Notes);
+  constructor(private UserName: string, private Notes: Note[] = [], private DB: DBHandler = new DBHandler(UserName, Notes)) {
+  }
+
+  updateUser() {
+    this.DB.databaseUpdater(this.UserName, this.Notes);
   }
 
   addNewNote(Title: string, Body: string, Color: TypeColor): void {
@@ -52,6 +55,7 @@ export class UserNotes {
   }
 
   listTitles() {
+    console.log("Notas de " + this.UserName + ":");
     this.Notes.forEach(note => {
       note.printTitle();
     })
@@ -69,8 +73,3 @@ export class UserNotes {
     }
   }
 }
-
-let Persona1: UserNotes = new UserNotes("Juan");
-Persona1.addNewNote("Nota 1", "Primera nota", "Blue");
-Persona1.listTitles();
-Persona1.readNote("Nota 1");
