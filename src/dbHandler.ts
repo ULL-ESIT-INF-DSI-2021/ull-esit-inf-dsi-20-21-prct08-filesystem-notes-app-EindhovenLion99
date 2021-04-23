@@ -5,6 +5,33 @@ const db = low(adapter);
 
 import {Note} from './Note'
 
+/**
+ * # Class DBHandler
+ * 
+ * Esta clase se encarga de leer y actualizar la base de datos en la cual se 
+ * encunetran los usuarios con sus respectivas notas. Ademas, tambien se 
+ * encarga de añadir un nuevo usuario si no lo encuentra en la base de datos.
+ * 
+ * Cuando se llamaba al constructor de UserNotes, este llamaba al constructor de
+ * este, para que asi comprobase las notas que ya estuvieran en la base de datos, de
+ * ese mismo usuario. En caso de que ese usuario no exista, el constructor llama a
+ * ```addNewUser()```, que añade al usuario nuevo. En caso de que ya exista el usuario
+ * cramos una variable sz, que almacenara la cantidad de notas que ya hay en la base de datos
+ * y las carga en el vector de notas.
+ * 
+ * @param sz Guarda la cantidad de notas que tiene un usuario ya creado
+ * 
+ * ## Funcion addNewUser(UserName: string)
+ * 
+ * Esta funcion se encarga de añadir un nuevo usuario a la basa de datos, que se hace con 
+ * la funcion push de lowdb.
+ * 
+ * ## Funcion updateUser(UserName: string)
+ * 
+ * Cuando se llama a esta funcion, se encarga de actualizar la base de datos, para eso borra los datos que
+ * estaban antes, e introduce los actuales. De esta forma evitamos que se dupliquen.
+ */
+
 export class DBHandler {
   constructor(UserName: string, Notes: Note[] = []) {
     if (!db.get('Users').find({ name: UserName}).value()) {

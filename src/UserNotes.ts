@@ -1,3 +1,8 @@
+import {Note, TypeColor} from './Note'
+import {DBHandler} from './dbHandler'
+const chalk = require('chalk');
+
+
 /**
  * # Clase UserNotes
  * Esta clase se encarga de la creacion, eliminacion y modificacion de las notas de cada usuario.
@@ -71,11 +76,6 @@
  * @param check
  * 
  */
-
-
-import {Note, TypeColor} from './Note'
-import {DBHandler} from './dbHandler'
-const chalk = require('chalk');
 
 export class UserNotes {
   constructor(private UserName: string, private Notes: Note[] = [], private DB: DBHandler = new DBHandler(UserName, Notes)) {

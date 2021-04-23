@@ -1,3 +1,7 @@
+import chalk from "chalk";
+
+export type TypeColor = "Red" | "Green" | "Blue" | "Yellow";
+
 /**
  * # Class Note
  * Esta clase se encargara de la estructura y componentes de cada nota.
@@ -18,10 +22,6 @@
  * @method getBody() Retorna el cuerpo de la nota
  * @method getColor() Retorna el color de la nota
  */
-
-import chalk from "chalk";
-
-export type TypeColor = "Red" | "Green" | "Blue" | "Yellow";
 
 export class Note {
   constructor(private Title: string,
