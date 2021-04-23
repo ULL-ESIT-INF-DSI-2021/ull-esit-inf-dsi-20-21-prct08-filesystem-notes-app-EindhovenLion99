@@ -2,7 +2,9 @@ import * as yargs from 'yargs';
 import {TypeColor} from './Note';
 import {UserNotes} from './UserNotes';
 
+// main.ts
 /**
+ * @module main
  * # Fichero main
  * 
  * Se encarga de la ejecucion del programa en si, para esto
@@ -24,6 +26,7 @@ import {UserNotes} from './UserNotes';
  * a la funcion list o read y ejecuta la accion.
  * 
  * @function colorGetter() Se encarga de transformar el color recibido por argumentos de tipo string a tipo TypeColor, necesaria para el obejeto Note
+ * @module
  */
 
 yargs.command({
