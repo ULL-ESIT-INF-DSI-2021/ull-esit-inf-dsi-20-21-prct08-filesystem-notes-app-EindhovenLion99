@@ -8,9 +8,10 @@ export type TypeColor = "Red" | "Green" | "Blue" | "Yellow";
  * 
  * ## Atributos
  * Los atributos de la clase Note son los siguientes:
- * @param Title
- * @param Body
- * @param Color
+ * @param Title Title
+ * @param Body Body
+ * @param Color Color
+ * 
  * 
  * ## Metodos
  * Son los setters y getters basicos de la clase, para poder modificar y obtener los valores de la clase
@@ -21,6 +22,48 @@ export type TypeColor = "Red" | "Green" | "Blue" | "Yellow";
  * @method getTitle() Retorna el titulo de la nota
  * @method getBody() Retorna el cuerpo de la nota
  * @method getColor() Retorna el color de la nota
+ * 
+ * @method printTitle() Hace un console.log del titulo de la nota
+ * 
+ * ```ts
+ * printTitle() {
+ *   switch (this.Color) {
+ *     case "Red":
+ *       console.log(chalk.red(this.Title));
+ *       break;
+ *     case "Blue":
+ *       console.log(chalk.blue(this.Title));
+ *       break;
+ *     case "Green":
+ *       console.log(chalk.green(this.Title));
+ *       break;
+ *     case "Yellow":
+ *       console.log(chalk.yellow(this.Title));
+ *       break;
+ *   } 
+ * }
+ * ```
+ * 
+ * @method printBody() Hace un console.log del body de la nota
+ * 
+ * ```ts
+ * printBody() {
+ *   switch (this.Color) {
+ *     case "Red":
+ *       console.log(chalk.red(this.Body));
+ *       break;
+ *     case "Blue":
+ *       console.log(chalk.blue(this.Body));
+ *       break;
+ *     case "Green":
+ *       console.log(chalk.green(this.Body));
+ *       break;
+ *     case "Yellow":
+ *       console.log(chalk.yellow(this.Body));
+ *       break;
+ *   } 
+ * }
+ * ```
  */
 
 export class Note {

@@ -68,6 +68,70 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<a href="#class-dbhandler" id="class-dbhandler" style="color: inherit; text-decoration: none;">
+							<h1>Class DBHandler</h1>
+						</a>
+					</div>
+					<p>Esta clase se encarga de leer y actualizar la base de datos en la cual se
+						encunetran los usuarios con sus respectivas notas. Ademas, tambien se
+					encarga de añadir un nuevo usuario si no lo encuentra en la base de datos.</p>
+					<p>Cuando se llamaba al constructor de UserNotes, este llamaba al constructor de
+						este, para que asi comprobase las notas que ya estuvieran en la base de datos, de
+						ese mismo usuario. En caso de que ese usuario no exista, el constructor llama a
+						<code>addNewUser()</code>, que añade al usuario nuevo. En caso de que ya exista el usuario
+						cramos una variable sz, que almacenara la cantidad de notas que ya hay en la base de datos
+					y las carga en el vector de notas.</p>
+					<dl class="tsd-comment-tags">
+						<dt>param</dt>
+						<dd><p>sz -&gt; Guarda la cantidad de notas que tiene un usuario ya creado</p>
+							<pre><code class="language-ts"><span style="color: #795E26">constructor</span><span style="color: #000000">(</span><span style="color: #001080">UserName</span><span style="color: #000000">: </span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">Notes</span><span style="color: #000000">: </span><span style="color: #001080">Note</span><span style="color: #000000">[] = []) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (!</span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">find</span><span style="color: #000000">({ </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">UserName</span><span style="color: #000000">}).</span><span style="color: #795E26">value</span><span style="color: #000000">()) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">addNewUser</span><span style="color: #000000">(</span><span style="color: #001080">UserName</span><span style="color: #000000">);</span>
+<span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">sz</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000"> = </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">find</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">UserName</span><span style="color: #000000">}).</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;notes&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">size</span><span style="color: #000000">().</span><span style="color: #795E26">value</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> = </span><span style="color: #098658">0</span><span style="color: #000000">; </span><span style="color: #001080">i</span><span style="color: #000000"> &lt; </span><span style="color: #001080">sz</span><span style="color: #000000">; </span><span style="color: #001080">i</span><span style="color: #000000">++) {</span>
+<span style="color: #000000">      </span><span style="color: #001080">Notes</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Note</span><span style="color: #000000">(</span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">find</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">UserName</span><span style="color: #000000">}).</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">`notes[</span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #0000FF">}</span><span style="color: #A31515">].Title`</span><span style="color: #000000">).</span><span style="color: #795E26">value</span><span style="color: #000000">(),</span>
+<span style="color: #000000">                          </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">find</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">UserName</span><span style="color: #000000">}).</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">`notes[</span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #0000FF">}</span><span style="color: #A31515">].Body`</span><span style="color: #000000">).</span><span style="color: #795E26">value</span><span style="color: #000000">(),</span>
+<span style="color: #000000">                          </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">find</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">UserName</span><span style="color: #000000">}).</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">`notes[</span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #0000FF">}</span><span style="color: #A31515">].Color`</span><span style="color: #000000">).</span><span style="color: #795E26">value</span><span style="color: #000000">()));</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+							<a href="#funcion-addnewuserusername-string" id="funcion-addnewuserusername-string" style="color: inherit; text-decoration: none;">
+								<h2>Funcion addNewUser(UserName: string)</h2>
+							</a>
+							<p>Esta funcion se encarga de añadir un nuevo usuario a la basa de datos, que se hace con
+							la funcion push de lowdb.</p>
+							<pre><code class="language-ts"><span style="color: #795E26">addNewUser</span><span style="color: #000000">(</span><span style="color: #001080">UserName</span><span style="color: #000000">: </span><span style="color: #001080">string</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">defaults</span><span style="color: #000000">({</span><span style="color: #001080">Users:</span><span style="color: #000000"> []}).</span><span style="color: #795E26">write</span><span style="color: #000000">();</span>
+<span style="color: #000000">  </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">push</span><span style="color: #000000">({ </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">UserName</span><span style="color: #000000">, </span><span style="color: #001080">notes:</span><span style="color: #000000"> [], </span>
+<span style="color: #000000">                          </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #267F99">Math</span><span style="color: #000000">.</span><span style="color: #795E26">floor</span><span style="color: #000000">(</span><span style="color: #267F99">Math</span><span style="color: #000000">.</span><span style="color: #795E26">random</span><span style="color: #000000">() * (</span><span style="color: #098658">10000</span><span style="color: #000000"> - </span><span style="color: #098658">1</span><span style="color: #000000">) + </span><span style="color: #098658">1</span><span style="color: #000000">)})</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">write</span><span style="color: #000000">();</span>
+<span style="color: #000000">}</span>
+</code></pre>
+							<a href="#funcion-updateuserusername-string" id="funcion-updateuserusername-string" style="color: inherit; text-decoration: none;">
+								<h2>Funcion updateUser(UserName: string)</h2>
+							</a>
+							<p>Cuando se llama a esta funcion, se encarga de actualizar la base de datos, para eso borra los datos que
+							estaban antes, e introduce los actuales. De esta forma evitamos que se dupliquen.</p>
+							<pre><code class="language-ts"><span style="color: #795E26">databaseUpdater</span><span style="color: #000000">(</span><span style="color: #001080">Username</span><span style="color: #000000">: </span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">Notes</span><span style="color: #000000">: </span><span style="color: #001080">Note</span><span style="color: #000000">[]) {</span>
+<span style="color: #000000">   </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">).</span><span style="color: #795E26">find</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">Username</span><span style="color: #000000">}).</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;notes&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">remove</span><span style="color: #000000">().</span><span style="color: #795E26">write</span><span style="color: #000000">();</span>
+<span style="color: #000000">   </span><span style="color: #001080">Notes</span><span style="color: #000000">.</span><span style="color: #795E26">forEach</span><span style="color: #000000">(</span><span style="color: #001080">note</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">     </span><span style="color: #001080">db</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Users&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">     .</span><span style="color: #795E26">find</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #001080">Username</span><span style="color: #000000">})</span>
+<span style="color: #000000">     .</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;notes&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">     .</span><span style="color: #795E26">push</span><span style="color: #000000">({</span><span style="color: #001080">Title:</span><span style="color: #000000"> </span><span style="color: #001080">note</span><span style="color: #000000">.</span><span style="color: #795E26">getTitle</span><span style="color: #000000">(), </span><span style="color: #001080">Body:</span><span style="color: #000000"> </span><span style="color: #001080">note</span><span style="color: #000000">.</span><span style="color: #795E26">getBody</span><span style="color: #000000">(), </span><span style="color: #001080">Color:</span><span style="color: #000000"> </span><span style="color: #001080">note</span><span style="color: #000000">.</span><span style="color: #795E26">getColor</span><span style="color: #000000">()})</span>
+<span style="color: #000000">     .</span><span style="color: #795E26">write</span><span style="color: #000000">()</span>
+<span style="color: #000000">   })</span>
+<span style="color: #000000"> }</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -108,7 +172,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dbHandler.ts:36</li>
+									<li>Defined in dbHandler.ts:71</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -137,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dbHandler.ts:50</li>
+									<li>Defined in dbHandler.ts:85</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -160,7 +224,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dbHandler.ts:57</li>
+									<li>Defined in dbHandler.ts:92</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>

@@ -10,9 +10,9 @@ const chalk = require('chalk');
  * El constructor se compone por un ```Username```, que sera el nombre de usuario, un conjunto de notas vacias, ya asignado y un objeto de tipo DBHandler.
  * El DBHandler se encarga la obtencion de los datos del .json y la actualizacion de estos.
  * 
- * @param UserName Nombre del usuario
- * @param Notes    Conjuto de notas
- * @param DB       Manejador de la base de datos
+ * @param UserName UserName -> Nombre del usuario
+ * @param Notes    Notes -> Conjuto de notas
+ * @param DB       DB -> Manejador de la base de datos
  * 
  * ## Funcion addNewNote(Title: string, Body: string, Color: TypeColor)
  * 
@@ -25,8 +25,25 @@ const chalk = require('chalk');
  * a true, se imprime por pantalla que la nota se ha creado, en caso contrario se imprime un mensaje alertando 
  * de que no se ha creado la nota debido a que existe.
  * 
- * @param complete  Comprueba que se realiza la accion
- * @param check     Comprueba que exista o no la nota a añadir
+ * @param complete  complete -> Comprueba que se realiza la accion
+ * @param check     check -> Comprueba que exista o no la nota a añadir
+ * 
+ * Las funciones siguen esta estructura:
+ * 
+ * ```ts  
+ * addNewNote(Title: string, Body: string, Color: TypeColor): boolean {
+ *   let complete: boolean = false;
+ *   let check: [boolean, Note] = this.existNote(Title);
+ *   if(!check[0]) {      // Logica de la funcion, sera diferente en cada una.
+ *     this.Notes.push(new Note(Title, Body, Color));
+ *     complete = true;
+ *     console.log(chalk.green.bold("Nueva nota creada!"));
+ *   } else {
+ *     console.log(chalk.red.bold("Ya existe una nota con el mismo titulo"));
+ *   }
+ *   return complete;
+ * }
+ * ```
  * 
  * ## Funcion modifyNote(Body: string, Title: string)
  * 
@@ -37,8 +54,8 @@ const chalk = require('chalk');
  * a true, se imprime por pantalla que la nota se ha modificado, en caso contrario se imprime un mensaje alertando 
  * de que no se ha modificado la nota debido a que no existe.
  * 
- * @param complete  Comprueba que se realiza la accion
- * @param check     Comprueba que exista o no la nota a añadir
+ * @param complete  complete -> Comprueba que se realiza la accion
+ * @param check     check -> Comprueba que exista o no la nota a modificar
  * 
  * 
  * ## Funcion removeNote(Title: string)
@@ -50,8 +67,8 @@ const chalk = require('chalk');
  * a true, se imprime por pantalla que la nota se ha eliminado, en caso contrario se imprime un mensaje alertando 
  * de que no se ha eliminado la nota debido a que no existe.
  * 
- * @param complete  Comprueba que se realiza la accion
- * @param check     Comprueba que exista o no la nota a añadir
+ * @param complete  complete -> Comprueba que se realiza la accion
+ * @param check     check -> Comprueba que exista o no la nota a eliminar
  * 
  * 
  * ## Funcion existNote(Title: string)
@@ -61,8 +78,8 @@ const chalk = require('chalk');
  * Tenemos una variable booleana found, si se encuentra el titulo en el conjunto esta variable se pasa a true, 
  * luego un objeto de tipo Note que se asigna el objeto econtrado, luego se retorna el objeto [boolean, Note]
  * 
- * @param found       True si se encuentra la nota
- * @param foundNote   Nota encontrada
+ * @param found       found -> True si se encuentra la nota
+ * @param foundNote   foundNote -> Nota encontrada
  * 
  * ## Funcion listTitles()
  * 
@@ -73,7 +90,7 @@ const chalk = require('chalk');
  * 
  * Si la nota existe, llamamos a printTitle() y printBody() de la nota a leer
  * 
- * @param check
+ * @param found   found -> True si se encuentra la nota
  * 
  */
 

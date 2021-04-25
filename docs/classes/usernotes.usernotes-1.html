@@ -68,6 +68,111 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<a href="#clase-usernotes" id="clase-usernotes" style="color: inherit; text-decoration: none;">
+							<h1>Clase UserNotes</h1>
+						</a>
+						<p>Esta clase se encarga de la creacion, eliminacion y modificacion de las notas de cada usuario.</p>
+					</div>
+					<p>El constructor se compone por un <code>Username</code>, que sera el nombre de usuario, un conjunto de notas vacias, ya asignado y un objeto de tipo DBHandler.
+					El DBHandler se encarga la obtencion de los datos del .json y la actualizacion de estos.</p>
+					<dl class="tsd-comment-tags">
+						<dt>param</dt>
+						<dd><p>UserName -&gt; Nombre del usuario</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>Notes -&gt; Conjuto de notas</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>DB -&gt; Manejador de la base de datos</p>
+							<a href="#funcion-addnewnotetitle-string-body-string-color-typecolor" id="funcion-addnewnotetitle-string-body-string-color-typecolor" style="color: inherit; text-decoration: none;">
+								<h2>Funcion addNewNote(Title: string, Body: string, Color: TypeColor)</h2>
+							</a>
+							<p>Se encarga de añadir una nueva nota al conjunto de notas, primero, tenemos una
+								variable booleana que se encarga de comprobar que se añade una nueva nota, luego,
+								una variable <code>check</code>, de tipo [boolean, number], la cual se le asigna lo que retorna
+							la llamada a la funcion <code>existNote()</code>, la cual retorna si la nota que recibe por parametro existe.</p>
+							<p>Si el valor del booleano de <code>check</code> es false, se procede a añadir la nota, se cambia el valor de complete
+								a true, se imprime por pantalla que la nota se ha creado, en caso contrario se imprime un mensaje alertando
+							de que no se ha creado la nota debido a que existe.</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>complete -&gt; Comprueba que se realiza la accion</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>check -&gt; Comprueba que exista o no la nota a añadir</p>
+							<p>Las funciones siguen esta estructura:</p>
+							<pre><code class="language-ts"><span style="color: #795E26">addNewNote</span><span style="color: #000000">(</span><span style="color: #001080">Title</span><span style="color: #000000">: </span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">Body</span><span style="color: #000000">: </span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">Color</span><span style="color: #000000">: </span><span style="color: #001080">TypeColor</span><span style="color: #000000">): </span><span style="color: #001080">boolean</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">complete</span><span style="color: #000000">: </span><span style="color: #267F99">boolean</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">check</span><span style="color: #000000">: [</span><span style="color: #267F99">boolean</span><span style="color: #000000">, </span><span style="color: #267F99">Note</span><span style="color: #000000">] = </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">existNote</span><span style="color: #000000">(</span><span style="color: #001080">Title</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000">(!</span><span style="color: #001080">check</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">]) {      </span><span style="color: #008000">// Logica de la funcion, sera diferente en cada una.</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">Notes</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Note</span><span style="color: #000000">(</span><span style="color: #001080">Title</span><span style="color: #000000">, </span><span style="color: #001080">Body</span><span style="color: #000000">, </span><span style="color: #001080">Color</span><span style="color: #000000">));</span>
+<span style="color: #000000">    </span><span style="color: #001080">complete</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">chalk</span><span style="color: #000000">.</span><span style="color: #001080">green</span><span style="color: #000000">.</span><span style="color: #795E26">bold</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Nueva nota creada!&quot;</span><span style="color: #000000">));</span>
+<span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">chalk</span><span style="color: #000000">.</span><span style="color: #001080">red</span><span style="color: #000000">.</span><span style="color: #795E26">bold</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Ya existe una nota con el mismo titulo&quot;</span><span style="color: #000000">));</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">complete</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+							<a href="#funcion-modifynotebody-string-title-string" id="funcion-modifynotebody-string-title-string" style="color: inherit; text-decoration: none;">
+								<h2>Funcion modifyNote(Body: string, Title: string)</h2>
+							</a>
+							<p>Se encarga de modificar una nota del conjunto de notas, al igual que la funcion anterior, tenemos una
+							variable booleana que se encarga de comprobar que se modifica la nota, al igual que check.</p>
+							<p>Si el valor del booleano de <code>check</code> es true, se procede a modificar la nota, se cambia el valor de complete
+								a true, se imprime por pantalla que la nota se ha modificado, en caso contrario se imprime un mensaje alertando
+							de que no se ha modificado la nota debido a que no existe.</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>complete -&gt; Comprueba que se realiza la accion</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>check -&gt; Comprueba que exista o no la nota a modificar</p>
+							<a href="#funcion-removenotetitle-string" id="funcion-removenotetitle-string" style="color: inherit; text-decoration: none;">
+								<h2>Funcion removeNote(Title: string)</h2>
+							</a>
+							<p>Se encarga de elimianr una nota del conjunto de notas, al igual que la funcion anterior, tenemos una
+							variable booleana que se encarga de comprobar que se elimina la nota, al igual que check.</p>
+							<p>Si el valor del booleano de <code>check</code> es true, se procede a eliminar la nota, se cambia el valor de complete
+								a true, se imprime por pantalla que la nota se ha eliminado, en caso contrario se imprime un mensaje alertando
+							de que no se ha eliminado la nota debido a que no existe.</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>complete -&gt; Comprueba que se realiza la accion</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>check -&gt; Comprueba que exista o no la nota a eliminar</p>
+							<a href="#funcion-existnotetitle-string" id="funcion-existnotetitle-string" style="color: inherit; text-decoration: none;">
+								<h2>Funcion existNote(Title: string)</h2>
+							</a>
+							<p>Se encarga de comprobar si la nota que se le pasa por parametro esta dentro del conjunto de notas.</p>
+							<p>Tenemos una variable booleana found, si se encuentra el titulo en el conjunto esta variable se pasa a true,
+							luego un objeto de tipo Note que se asigna el objeto econtrado, luego se retorna el objeto [boolean, Note]</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>found -&gt; True si se encuentra la nota</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>foundNote -&gt; Nota encontrada</p>
+							<a href="#funcion-listtitles" id="funcion-listtitles" style="color: inherit; text-decoration: none;">
+								<h2>Funcion listTitles()</h2>
+							</a>
+							<p>Se encarga de listar todas las notas del usuario
+							Se llama a la funcion printTitle() de cada nota del conjunto.</p>
+							<a href="#funcion-readnotetitle-string" id="funcion-readnotetitle-string" style="color: inherit; text-decoration: none;">
+								<h2>Funcion readNote(Title: string)</h2>
+							</a>
+							<p>Si la nota existe, llamamos a printTitle() y printBody() de la nota a leer</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>found -&gt; True si se encuentra la nota</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -113,7 +218,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:80</li>
+									<li>Defined in UserNotes.ts:97</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -145,7 +250,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:88</li>
+									<li>Defined in UserNotes.ts:105</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -174,7 +279,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:129</li>
+									<li>Defined in UserNotes.ts:146</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -197,7 +302,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:141</li>
+									<li>Defined in UserNotes.ts:158</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -214,7 +319,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:101</li>
+									<li>Defined in UserNotes.ts:118</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -240,7 +345,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:148</li>
+									<li>Defined in UserNotes.ts:165</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -263,7 +368,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:115</li>
+									<li>Defined in UserNotes.ts:132</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -286,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in UserNotes.ts:84</li>
+									<li>Defined in UserNotes.ts:101</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
