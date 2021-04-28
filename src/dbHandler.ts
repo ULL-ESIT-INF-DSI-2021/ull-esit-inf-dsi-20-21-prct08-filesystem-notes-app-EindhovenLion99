@@ -1,7 +1,8 @@
 const low = require('lowdb');
+const fs = require('fs');
+import {spawn} from 'child_process'
 const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('./src/database/users.json');
-const db = low(adapter);
+
 
 import {Note} from './Note'
 
@@ -69,30 +70,42 @@ import {Note} from './Note'
  */
 
 export class DBHandler {
+  private db: any;
+  private filename: string = "";
   constructor(UserName: string, Notes: Note[] = []) {
-    if (!db.get('Users').find({ name: UserName}).value()) {
+    if (fs.readdirSync("./src/database").length === 0) {
+      this.filename = UserName + ".json"; 
+      const touch = spawn('touch', [this.filename]);
+      const adapter = new FileSync(`./src/database/${this.filename}`);
+      this.db = low(adapter);
+    } else {
+      this.filename = UserName + ".json";
+      const adapter = new FileSync(`./src/database/${this.filename}`);
+      this.db = low(adapter);
+    }
+    if (!this.db.get('User').find({ name: UserName}).value()) {
       this.addNewUser(UserName);
     } else {
-      let sz: number = db.get('Users').find({name: UserName}).get("notes").size().value();
+      let sz: number = this.db.get('User').find({name: UserName}).get("notes").size().value();
       for (let i = 0; i < sz; i++) {
-        Notes.push(new Note(db.get('Users').find({name: UserName}).get(`notes[${i}].Title`).value(),
-                            db.get('Users').find({name: UserName}).get(`notes[${i}].Body`).value(),
-                            db.get('Users').find({name: UserName}).get(`notes[${i}].Color`).value()));
+        Notes.push(new Note(this.db.get('User').find({name: UserName}).get(`notes[${i}].Title`).value(),
+                            this.db.get('User').find({name: UserName}).get(`notes[${i}].Body`).value(),
+                            this.db.get('User').find({name: UserName}).get(`notes[${i}].Color`).value()));
       }
     }
   }
 
   addNewUser(UserName: string) {
-    db.defaults({Users: []}).write();
-    db.get('Users').push({ name: UserName, notes: [], 
+    this.db.defaults({User: []}).write();
+    this.db.get('User').push({ name: UserName, notes: [], 
                             id: Math.floor(Math.random() * (10000 - 1) + 1)})
       .write();
   }
 
   databaseUpdater(Username: string, Notes: Note[]) {
-    db.get('Users').find({name: Username}).get("notes").remove().write();
+    this.db.get('User').find({name: Username}).get("notes").remove().write();
     Notes.forEach(note => {
-      db.get('Users')
+      this.db.get('User')
       .find({name: Username})
       .get("notes")
       .push({Title: note.getTitle(), Body: note.getBody(), Color: note.getColor()})
